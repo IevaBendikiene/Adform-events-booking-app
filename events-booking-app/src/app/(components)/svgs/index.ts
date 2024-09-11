@@ -1,0 +1,1 @@
+export {default as LondonBigBen} from "./LondonBigBen.svg"
