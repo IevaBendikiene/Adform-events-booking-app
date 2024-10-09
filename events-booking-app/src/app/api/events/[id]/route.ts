@@ -50,7 +50,7 @@ export async function DELETE(
     try {
       const { id } = params;
       const body = await request.json()
-      const eventData = body.formatData
+      const eventData = body.formData
 
   const updateEventData = await Event.findByIdAndUpdate(id, {
     ...eventData,

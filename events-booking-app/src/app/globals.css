@@ -2,16 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-body{
-  background-color: black;
-  color:aqua;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:"Lato",sans-serif;
+  background-color: "#fdfdff";
+}
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply  text-nav font-raleway;
+  }
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  h3 {
+    @apply text-2xl mb-5 font-semibold;
+  }
+  h4 {
+    @apply text-xl m-1;
+  }
+  p {
+    @apply text-sm text-default-text;
+  }
+  form {
+    @apply  rounded-md p-6 bg-table text-nav
+  }
+  label {
+    @apply mt-3 font-semibold
+  }
+  input,
+  select,
+  textarea {
+    @apply  p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black bg-page;
+    /* "p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black" */
+  }
 }
 @layer components {
-  .icon {
-    @apply text-default-text text-xl;
+  .container {
+    @apply mx-auto p-1 min-h-screen flex flex-col
   }
+  .wrapper {
+    @apply p-4 flex-grow
+  }
+  .icon {
+    @apply text-logo text-xl;
+  }
+
   /* .btn {
     @apply hover:no-underline bg-blue-accent hover:bg-blue-accent-hover tracking-wider w-full text-center tex-nav font-bold cursor-pointer uppercase px-4 py-2 rounded-md transition-colors block;
   } */
+   .btn {
+    @apply px-4 py-2 bg-logo rounded-lg w-1/4 hover:bg-button-hover text-center
+     text-page cursor-pointer font-semibold transition-colors block
+   }
 }

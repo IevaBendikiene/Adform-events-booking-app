@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import axios from 'axios'
 import Link from 'next/link'
 import {toast} from "react-hot-toast"
 import { useRouter} from "next/navigation"
@@ -9,23 +8,48 @@ import { useState } from 'react'
 export default function ProfilePage() {
   const router = useRouter()
   const [data, setData] = useState('nothing')
+
+  const logout = async () => {
+    try {
+      const response = await fetch('/api/users/logout', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
   
-  const logout = async() => {
-
-     try {
-      axios.get('/api/users/logout')
-      toast.success("Logout successfull")
-      router.push("/login")
-
-     } catch(error: any){
-      console.log(error.message)
-     }
-  }
+      if (response.ok) {
+        toast.success("Logout successful");
+        router.push("/");
+      } else {
+        throw new Error("Logout failed");
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+  
   const getUserDetails = async () => {
-    const res = await axios.get('/api/users/profile')
-    console.log(res.data)
-    setData(res.data.data._id)//this data comes from users/profile/route.ts file line16
-  }
+    try {
+      const response = await fetch('/api/users/profile', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json(); 
+        console.log(data);
+        setData(data.data._id); 
+      } else {
+        throw new Error("Failed to fetch user details");
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+  
   return (
     <div className='flex flex-col items-center justify-center min-h-screen py-2'>
       <h1>Profile</h1>
